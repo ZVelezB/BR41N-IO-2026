@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FlyingSystem
 {
@@ -106,6 +107,8 @@ namespace FlyingSystem
         public void Land()
         {
             inAir = false;
+  
+            FindObjectOfType<LevelTimer>().FinishLevel();
         }
 
         public void AddYawInput(float value)
