@@ -1,14 +1,20 @@
 using UnityEngine;
-using TMPro; // Required for TextMeshPro
+using TMPro;
 
 public class TimeDisplay : MonoBehaviour
 {
-    // Drag your TextMeshPro element into this slot in the Unity Inspector
     public TextMeshProUGUI resultText; 
 
     void Start()
     {
-        // Read the time from the static class and format it to 2 decimal places ("F2")
-        resultText.text = "Congratulations! Your time was: " + TimerData.finalTime.ToString("F2");
+        // Calculate minutes, seconds, and hundredths of a second
+        int minutes = Mathf.FloorToInt(TimerData.finalTime / 60);
+        int seconds = Mathf.FloorToInt(TimerData.finalTime % 60);
+        int fraction = Mathf.FloorToInt((TimerData.finalTime % 1) * 100);
+
+        // Format the string to look like MM:SS.ms (e.g., 01:24.53)
+        string formattedTime = string.Format("{0:00}:{1:00}.{2:00}", minutes, seconds, fraction);
+
+        resultText.text = "Congratulations! Your time was: " + formattedTime;
     }
 }
